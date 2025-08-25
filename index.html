@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Web Development</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4e54c8;
+            --primary-dark: #3f42b6;
+            --secondary: #ff6b6b;
+            --dark: #2c3e50;
+            --light: #f8f9fa;
+            --accent: #ffc107;
+            --gradient: linear-gradient(to right, #4e54c8, #8f94fb);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            color: #333;
+        }
+        
+        /* Navbar enhancements */
+        .navbar {
+            background: var(--gradient) !important;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
+            padding: 0.8rem 1rem;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: white !important;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .navbar-nav .nav-link {
+            color: rgba(255, 255, 255, 0.85) !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            margin: 0 5px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: white !important;
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        /* Hero section */
+        .hero-section {
+            background: var(--dark);
+            padding-top: 100px;
+            padding-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%234e54c8' fill-opacity='0.15' d='M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,192C1248,192,1344,128,1392,96L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-img {
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+            transition: all 0.5s ease;
+        }
+        
+        .hero-img:hover {
+            transform: translateY(-10px);
+        }
+        
+        /* Cards section */
+        .services-section {
+            background: var(--light);
+            padding: 80px 0;
+        }
+        
+        .service-card {
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            height: 100%;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* About section */
+        .about-section {
+            padding: 80px 0;
+        }
+        
+        .about-img {
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+        }
+        
+        .about-img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Testimonials */
+        .testimonials-section {
+            background: var(--gradient);
+            padding: 80px 0;
+            color: white;
+        }
+        
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .testimonial-card:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-5px);
+        }
+        
+        .testimonial-img {
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        /* CTA sections */
+        .cta-section {
+            padding: 60px 0;
+            background: var(--light);
+        }
+        
+        .cta-form {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        /* Social icons */
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-5px) rotate(5deg);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Footer */
+        .footer-section {
+            background: var(--dark);
+            padding: 60px 0 30px;
+            color: white;
+        }
+        
+        .footer-heading {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        .footer-link {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 15px;
+        }
+        
+        .footer-link::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .footer-link:hover::before {
+            opacity: 1;
+            transform: translateX(3px);
+        }
+        
+        /* Buttons */
+        .btn-primary {
+            background: var(--gradient);
+            border: none;
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(78, 84, 200, 0.3);
+        }
+        
+        .btn-danger {
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-danger:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(220, 53, 69, 0.3);
+        }
+        
+        /* Utilities */
+        .section-title {
+            position: relative;
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+        
+        .text-gradient {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 5s ease-in-out infinite;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .testimonial-card {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fa-brands fa-bootstrap"></i> Bootstrap
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Portfolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Testimonials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#footer">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <h1 class="display-4 fw-bold mb-4">Become a <span class="text-gradient">Web Developer</span></h1>
+                    <p class="lead mb-4">We create mobile-first, responsive designs that look amazing on any device. Let us build your next website using the power of Bootstrap.</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#footer" class="btn btn-primary btn-lg">Contact Us</a>
+                        <a href="#services" class="btn btn-outline-light btn-lg">Our Services</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img src="https://images.unsplash.com/photo-1581276879432-15e50529f34b?auto=format&fit=crop&q=80&w=600" alt="Web Development" class="img-fluid hero-img floating">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Signup Form -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="cta-form d-flex flex-wrap justify-content-center align-items-center gap-4 p-4">
+                        <h4 class="mb-0 fw-bold text-dark">Sign up to know more details</h4>
+                        <div class="d-flex flex-grow-1 flex-wrap gap-2">
+                            <input type="email" class="form-control flex-grow-1" placeholder="Enter your email">
+                            <button class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <h2 class="text-center section-title">Our Services</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="service-card card">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon">
+                                <i class="fa-solid fa-laptop-code"></i>
+                            </div>
+                            <h4 class="card-title">Web Design</h4>
+                            <p class="card-text">We create beautiful, responsive websites using Bootstrap that work perfectly on all devices.</p>
+                            <a href="#" class="btn btn-outline-primary mt-3">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service-card card">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon">
+                                <i class="fa-solid fa-code"></i>
+                            </div>
+                            <h4 class="card-title">Web Development</h4>
+                            <p class="card-text">From front-end to back-end, we build robust web applications with modern technologies.</p>
+                            <a href="#" class="btn btn-outline-primary mt-3">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service-card card">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon">
+                                <i class="fa-solid fa-mobile-screen-button"></i>
+                            </div>
+                            <h4 class="card-title">App Development</h4>
+                            <p class="card-text">We develop cross-platform mobile applications that provide seamless user experiences.</p>
+                            <a href="#" class="btn btn-outline-primary mt-3">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=600" alt="Learn Web Development" class="img-fluid about-img">
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="section-title">Learn the Basics</h2>
+                    <p class="lead">Web development is the building and maintenance of websites; it's the work that happens behind the scenes to make a website look great, work fast and perform well with a seamless user experience.</p>
+                    <p>Web development skills are in high demand worldwide and well paid too – making development a great career option. It is one of the easiest accessible higher paid fields as you do not need a traditional university degree to become qualified.</p>
+                    <button class="btn btn-primary mt-3">Read More</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="text-center section-title text-white">What Our Clients Say</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="testimonial-card">
+                        <div class="text-center mb-4">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100" alt="Client" class="testimonial-img rounded-circle">
+                        </div>
+                        <p class="card-text">"This team transformed our online presence completely. The website is not only beautiful but also highly functional."</p>
+                        <div class="text-center mt-4">
+                            <div class="social-icons">
+                                <a href="#" class="social-icon me-2"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="social-icon me-2"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="testimonial-card">
+                        <div class="text-center mb-4">
+                            <img src="https://images.unsplash.com/photo-1554151228-14d9def656e4?auto=format&fit=crop&q=80&w=100" alt="Client" class="testimonial-img rounded-circle">
+                        </div>
+                        <p class="card-text">"The responsiveness and attention to detail were exceptional. Our website traffic has increased by 150% since the redesign."</p>
+                        <div class="text-center mt-4">
+                            <div class="social-icons">
+                                <a href="#" class="social-icon me-2"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="social-icon me-2"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="testimonial-card">
+                        <div class="text-center mb-4">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=100" alt="Client" class="testimonial-img rounded-circle">
+                        </div>
+                        <p class="card-text">"Professional, efficient, and incredibly talented. The website they delivered exceeded all our expectations."</p>
+                        <div class="text-center mt-4">
+                            <div class="social-icons">
+                                <a href="#" class="social-icon me-2"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="social-icon me-2"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="testimonial-card">
+                        <div class="text-center mb-4">
+                            <img src="https://images.unsplash.com/photo-1614289371518-722f2615943d?auto=format&fit=crop&q=80&w=100" alt="Client" class="testimonial-img rounded-circle">
+                        </div>
+                        <p class="card-text">"The communication throughout the project was excellent. They really understood our vision and brought it to life."</p>
+                        <div class="text-center mt-4">
+                            <div class="social-icons">
+                                <a href="#" class="social-icon me-2"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="social-icon me-2"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8">
+                    <h2 class="section-title">Stay Updated</h2>
+                    <p class="lead mb-5">Subscribe to our newsletter to receive updates about web development trends and tips.</p>
+                    
+                    <form class="d-flex flex-wrap justify-content-center gap-3 mb-5">
+                        <input type="email" class="form-control form-control-lg flex-grow-1" style="max-width: 400px;" placeholder="Enter your email">
+                        <button class="btn btn-primary btn-lg">Subscribe</button>
+                    </form>
+                    
+                    <div class="social-icons mb-5">
+                        <a href="#" class="social-icon me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon me-3"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-icon me-3"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    
+                    <p class="text-muted">A Web Developer is responsible for designing, coding, and modifying websites from layout to function according to a client's specifications. They aim to create visually appealing sites that feature user-friendly design and clear navigation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-3 mb-5">
+                    <h4 class="footer-heading">SHOPPING ONLINE</h4>
+                    <a href="#" class="footer-link">Frequently asked questions</a>
+                    <a href="#" class="footer-link">Where we deliver?</a>
+                    <a href="#" class="footer-link">Delivery options</a>
+                    <a href="#" class="footer-link">Pricing plans</a>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-5">
+                    <h4 class="footer-heading">GIFT CARDS</h4>
+                    <a href="#" class="footer-link">Frequently asked questions</a>
+                    <a href="#" class="footer-link">Delivery and payment</a>
+                    <a href="#" class="footer-link">Activate the card</a>
+                    <a href="#" class="footer-link">Terms and rules</a>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-5">
+                    <h4 class="footer-heading">COMPANY</h4>
+                    <a href="#" class="footer-link">Buy a gift card</a>
+                    <a href="#" class="footer-link">Our history</a>
+                    <a href="#" class="footer-link">Return policy</a>
+                    <a href="#" class="footer-link">Contact information</a>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-5">
+                    <h4 class="footer-heading">DIAMOND PROGRAM</h4>
+                    <a href="#" class="footer-link">About the program</a>
+                    <a href="#" class="footer-link">Registration</a>
+                    <a href="#" class="footer-link">Application process</a>
+                    <a href="#" class="footer-link">Program rules</a>
+                </div>
+            </div>
+            <div class="text-center pt-4 border-top border-secondary">
+                <p>&copy; 2023 Bootstrap Web Development. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
